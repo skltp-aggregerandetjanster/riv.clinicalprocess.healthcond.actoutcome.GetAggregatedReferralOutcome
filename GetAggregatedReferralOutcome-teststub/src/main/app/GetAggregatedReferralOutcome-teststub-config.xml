@@ -10,7 +10,7 @@
 
     <spring:beans>
       <!-- Load all resources needed by the core artifact -->
-      <spring:import resource="classpath:GetAggregatedReferralOutcome-common.xml"/>
+      <spring:import resource="classpath:aggregating-services-common.xml"/>
       <spring:bean
 			class="org.jasypt.spring.properties.EncryptablePropertyPlaceholderConfigurer"
 			id="propertyConfigurer">
