@@ -20,29 +20,18 @@ public class ResponseListFactoryImpl implements ResponseListFactory {
 
 	@Override
 	public String getXmlFromAggregatedResponse(QueryObject queryObject, List<Object> aggregatedResponseList) {
-		GetReferralOutcomeResponseType aggregatedResponse = new GetReferralOutcomeResponseType();
+		final GetReferralOutcomeResponseType aggregatedResponse = new GetReferralOutcomeResponseType();
 
+		 for (Object object : aggregatedResponseList) {
+		    	final GetReferralOutcomeResponseType response = (GetReferralOutcomeResponseType) object;
+				aggregatedResponse.getReferralOutcome().addAll(response.getReferralOutcome());
+			}
 
-        // TODO: CHANGE GENERATED SAMPLE CODE - START
-        if (1==1) throw new UnsupportedOperationException("Not yet implemented");
-        /*
-
-	    for (Object object : aggregatedResponseList) {
-	    	GetReferralOutcomeResponseType response = (GetReferralOutcomeResponseType)object;
-			aggregatedResponse.getRequestActivity().addAll(response.getRequestActivity());
-		}
-
-	    if (log.isInfoEnabled()) {
-    		String subjectOfCareId = queryObject.getFindContent().getRegisteredResidentIdentification();
-        	log.info("Returning {} aggregated remisstatus for subject of care id {}", aggregatedResponse.getRequestActivity().size() ,subjectOfCareId);
-        }
-
-        */
-        // TODO: CHANGE GENERATED SAMPLE CODE - END
-
-
-        // Since the class GetReferralOutcomeResponseType don't have an @XmlRootElement annotation
-        // we need to use the ObjectFactory to add it.
+		    if (log.isInfoEnabled()) {
+	    		String subjectOfCareId = queryObject.getFindContent().getRegisteredResidentIdentification();
+	        	log.info("Returning {} aggregated alert informations for subject of care id {}", aggregatedResponse.getReferralOutcome().size() ,subjectOfCareId);
+	        }
+		
         return jaxbUtil.marshal(OF.createGetReferralOutcomeResponse(aggregatedResponse));
 	}
 }
