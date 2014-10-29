@@ -63,7 +63,7 @@ public class RequestListFactoryImpl implements RequestListFactory {
 		List<Object[]> reqList = new ArrayList<Object[]>();
 		for (Entry<String, List<String>> entry : sourceSystem_pdlUnitList_map.entrySet()) {
 			final String sourceSystem = entry.getKey();
-            final GetReferralOutcomeType request = new GetReferralOutcomeType();
+            final GetReferralOutcomeType request = originalRequest;
 
             if(log.isInfoEnabled()) {
             	log.info("Calling source system using logical address {} for subject of care {}", sourceSystem, originalRequest.getPatientId().getId());

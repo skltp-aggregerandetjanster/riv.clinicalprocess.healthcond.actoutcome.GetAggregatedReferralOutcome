@@ -1,6 +1,5 @@
 package se.skltp.aggregatingservices.riv.clinicalprocess.healthcond.actoutcome.getaggregatedreferraloutcome.integrationtest;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.*;
 import static se.skltp.agp.riv.interoperability.headers.v1.CausingAgentEnum.VIRTUALIZATION_PLATFORM;
 import static se.skltp.agp.test.consumer.AbstractTestConsumer.SAMPLE_ORIGINAL_CONSUMER_HSAID;
@@ -22,13 +21,14 @@ import java.util.List;
 import javax.xml.ws.Holder;
 import javax.xml.ws.soap.SOAPFaultException;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soitoolkit.commons.mule.util.RecursiveResourceBundle;
 
 import riv.clinicalprocess.healthcond.actoutcome.getreferraloutcomeresponder.v3.GetReferralOutcomeResponseType;
-
+import riv.clinicalprocess.healthcond.actoutcome.v3.ReferralOutcomeType;
 import se.skltp.aggregatingservices.riv.clinicalprocess.healthcond.actoutcome.getaggregatedreferraloutcome.GetAggregatedReferralOutcomeMuleServer;
 import se.skltp.agp.riv.interoperability.headers.v1.ProcessingStatusRecordType;
 import se.skltp.agp.riv.interoperability.headers.v1.ProcessingStatusType;
@@ -172,22 +172,13 @@ public class GetAggregatedReferralOutcomeIntegrationTest extends AbstractAggrega
     	int expextedResponseSize = testData.length;
 
 
-        // TODO: CHANGE GENERATED SAMPLE CODE - START
-        if (1==1) throw new UnsupportedOperationException("Not yet implemented");
-        /*
 
-		assertEquals(expextedResponseSize, response.getRequestActivity().size());
+		assertEquals(expextedResponseSize, response.getReferralOutcome().size());
 
 		for (int i = 0; i < testData.length; i++) {
-			RequestActivityType responseElement = response.getRequestActivity().get(i);
-			assertEquals(registeredResidentId, responseElement.getSubjectOfCareId());
-
-			assertEquals(testData[i].getExpectedBusinessObjectId(), responseElement.getSenderRequestId());
-			assertEquals(testData[i].getExpectedLogicalAddress(), responseElement.getCareUnit());
+			final ReferralOutcomeType responseElement = response.getReferralOutcome().get(i);
+			assertEquals(registeredResidentId, responseElement.getReferralOutcomeHeader().getPatientId().getId());
 		}
-
-        */
-        // TODO: CHANGE GENERATED SAMPLE CODE - END
 
 
     	// Verify the size of the processing status and return it for further analysis
