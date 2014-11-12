@@ -31,8 +31,6 @@ public class QueryObjectFactoryImpl implements QueryObjectFactory {
 	 * 1. subjectOfCareId --> registeredResidentIdentification
 	 * 2. "riv:clinicalprocess:healthcond:actoutcome" --> serviceDomain
 	 * 3. "und-kon-ure" --> categorization
-	 * 4. SourceSystemHSAId --> LogicalAddress
-	 * 5. SourceSystemHSAId --> SourceSystem
 	 */
 	public QueryObject createQueryObject(final Node node) {
 		final GetReferralOutcomeType request = (GetReferralOutcomeType)ju.unmarshal(node);
@@ -47,8 +45,6 @@ public class QueryObjectFactoryImpl implements QueryObjectFactory {
 		}
 		fc.setServiceDomain(eiServiceDomain);
 		fc.setCategorization(eiCategorization);
-		fc.setLogicalAddress(request.getSourceSystemHSAId());
-		fc.setSourceSystem(request.getSourceSystemHSAId());
 		
 		return new QueryObject(fc, request);
 	}
