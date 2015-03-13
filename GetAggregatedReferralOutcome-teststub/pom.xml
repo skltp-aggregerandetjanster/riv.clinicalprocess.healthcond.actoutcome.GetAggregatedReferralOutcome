@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- 
+<!--
 DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOING!
 [soi-toolkit.gen.version=0.6.2-SNAPSHOT]
 [soi-toolkit.gen.type=services]
@@ -13,7 +13,7 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
   <parent>
     <groupId>se.skltp.aggregatingservices.riv.clinicalprocess.healthcond.actoutcome</groupId>
     <artifactId>GetAggregatedReferralOutcome-parent</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
   </parent>
 
   <artifactId>GetAggregatedReferralOutcome-teststub</artifactId>
@@ -37,12 +37,12 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
     <dependency>
       <groupId>se.skltp.agp</groupId>
       <artifactId>agp-core</artifactId>
-      <version>1.2.1</version>
+      <version>1.2.3</version>
     </dependency>
     <dependency>
       <groupId>se.skltp.agp</groupId>
       <artifactId>agp-test-common</artifactId>
-      <version>1.2.1</version>
+      <version>1.2.3</version>
     </dependency>
   </dependencies>
 
@@ -115,7 +115,7 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
               <groupId>org.safehaus.jug</groupId>
               <artifactId>jug.osgi</artifactId>
             </exclusion>
-            
+
             <!-- activemq needs to be added manually to MULE_HOME/lib/user if required, see issue 283 -->
             <exclusion>
               <groupId>org.apache.activemq</groupId>
@@ -156,8 +156,8 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
   <profiles>
     <profile>
       <id>muleServer</id>
-      <!-- Start mule server with the command 
-           "mvn -PmuleServer" or "mvn -PmuleServer -Dexec.args="${artifaceId}-config.xml"" 
+      <!-- Start mule server with the command
+           "mvn -PmuleServer" or "mvn -PmuleServer -Dexec.args="${artifaceId}-config.xml""
            if you want to override the default config-file -->
       <build>
         <defaultGoal>test</defaultGoal>
