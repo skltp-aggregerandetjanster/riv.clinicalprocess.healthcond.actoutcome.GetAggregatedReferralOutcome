@@ -11,24 +11,23 @@ import scenarios.GetAggregatedReferralOutcomeScenario
  */
 class TP00WarmUp extends Simulation {
 
-
 //val baseURL             = "https://test.esb.ntjp.se/vp/clinicalprocess/healthcond/actoutcome/GetReferralOutcome/3/rivtabp21"
 //val baseURL             = "http://ine-dit-app02.sth.basefarm.net:9014/GetAggregatedReferralOutcome/service/v3"
-val baseURL             = "https://qa.esb.ntjp.se/vp/clinicalprocess/healthcond/actoutcome/GetReferralOutcome/3/rivtabp21"
+  val baseURL             = "https://qa.esb.ntjp.se/vp/clinicalprocess/healthcond/actoutcome/GetReferralOutcome/3/rivtabp21"
 
-  val testDuration      = 60 * 60 * 12 seconds // 12 timmar
-  val minWaitDuration   = 2000 milliseconds
-  val maxWaitDuration   = 5000 milliseconds
-  val times:Int         = 1
+  val testDuration      =  1 minute
+  val minWaitDuration   =  2 seconds
+  val maxWaitDuration   =  5 seconds
+  val times:Int         =  1 // 6
   
   val httpProtocol = http.baseURL(baseURL).disableResponseChunksDiscarding
 
   val warmUp = scenario("warm up")
                  .repeat(times) {
-                   feed(csv("patients.csv").queue)
-//                   exec(session => {
-//                     session.set("status","200").set("patientid","121212121212").set("name","Tolvan Tolvansson").set("count","3")
-//                   })    
+//                   feed(csv("patients.csv").queue)
+                   exec(session => {
+                     session.set("status","200").set("patientid","121212121212").set("name","Tolvan Tolvansson").set("count","3")
+                   })    
                    .exec(GetAggregatedReferralOutcomeScenario.request)
                    .pause(1 second)
                   }
