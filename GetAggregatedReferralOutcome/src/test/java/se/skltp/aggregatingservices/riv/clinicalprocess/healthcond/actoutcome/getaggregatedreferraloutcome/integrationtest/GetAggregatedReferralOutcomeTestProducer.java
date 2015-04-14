@@ -13,7 +13,7 @@ import se.skltp.agp.test.producer.TestProducerDb;
 @WebService(serviceName = "GetReferralOutcomeResponderService", portName = "GetReferralOutcomeResponderPort", targetNamespace = "urn:riv:clinicalprocess:healthcond:actoutcome:GetReferralOutcome:3:rivtabp21", name = "GetReferralOutcomeInteraction")
 public class GetAggregatedReferralOutcomeTestProducer implements GetReferralOutcomeResponderInterface {
 
-	private static final Logger log = LoggerFactory.getLogger(GetAggregatedReferralOutcomeTestProducer.class);
+	protected static final Logger log = LoggerFactory.getLogger(GetAggregatedReferralOutcomeTestProducer.class);
 
 	private TestProducerDb testDb;
 	public void setTestDb(TestProducerDb testDb) {
@@ -22,7 +22,7 @@ public class GetAggregatedReferralOutcomeTestProducer implements GetReferralOutc
 
 	public GetReferralOutcomeResponseType getReferralOutcome(String logicalAddress, GetReferralOutcomeType request) {
 		final Object response = testDb.processRequest(logicalAddress, request.getPatientId().getId());
-		if(response == null) {
+		if (response == null) {
 			return new GetReferralOutcomeResponseType();
 		}
         return (GetReferralOutcomeResponseType) response;
