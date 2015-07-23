@@ -21,7 +21,6 @@ import java.util.List;
 import javax.xml.ws.Holder;
 import javax.xml.ws.soap.SOAPFaultException;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -170,8 +169,6 @@ public class GetAggregatedReferralOutcomeIntegrationTest extends AbstractAggrega
     	// Verify the response size and content
     	GetReferralOutcomeResponseType response = responseHolder.value;
     	int expextedResponseSize = testData.length;
-
-
 
 		assertEquals(expextedResponseSize, response.getReferralOutcome().size());
 
