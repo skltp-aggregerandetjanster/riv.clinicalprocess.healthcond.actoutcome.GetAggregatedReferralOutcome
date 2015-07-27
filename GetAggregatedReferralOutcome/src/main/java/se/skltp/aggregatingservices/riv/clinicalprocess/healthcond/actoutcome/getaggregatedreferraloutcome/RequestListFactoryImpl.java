@@ -22,7 +22,8 @@ import se.skltp.agp.service.api.RequestListFactory;
 public class RequestListFactoryImpl implements RequestListFactory {
 
 	private static final Logger log = LoggerFactory.getLogger(RequestListFactoryImpl.class);
-	private static final ThreadSafeSimpleDateFormat df = new ThreadSafeSimpleDateFormat("YYYYMMDDhhmmss");
+    private static final ThreadSafeSimpleDateFormat requestDateFormat = new ThreadSafeSimpleDateFormat("yyyyMMdd");
+    private static final ThreadSafeSimpleDateFormat mostRecentContentDateFormat = new ThreadSafeSimpleDateFormat("yyyyMMddHHmmss");
 
 	/**
 	 * Filtrera svarsposter från i EI (ei-engagement) baserat parametrar i GetReferralOutcome requestet (req).
@@ -40,8 +41,15 @@ public class RequestListFactoryImpl implements RequestListFactory {
 	 * 3. careUnitId = listan av PDL-enheter som returnerats från EI för aktuellt source system)
 	 */
 	public List<Object[]> createRequestList(QueryObject qo, FindContentResponseType src) {
-		final GetReferralOutcomeType originalRequest = (GetReferralOutcomeType)qo.getExtraArg();
-		final String reqCareUnit = originalRequest.getSourceSystemHSAId();
+		final GetReferralOutcomeType request = (GetReferralOutcomeType)qo.getExtraArg();
+		final String reqCareUnit = request.getSourceSystemHSAId();
+		
+        Date requestFromDate = null;
+        Date requestToDate = null;
+        if (request.getDatePeriod() != null) {
+            requestFromDate = parseDateString(request.getDatePeriod().getStart());
+            requestToDate = parseDateString(request.getDatePeriod().getEnd());
+        }
 
 		FindContentResponseType eiResp = (FindContentResponseType)src;
 		List<EngagementType> inEngagements = eiResp.getEngagement();
@@ -50,60 +58,67 @@ public class RequestListFactoryImpl implements RequestListFactory {
 
 		Map<String, List<String>> sourceSystem_pdlUnitList_map = new HashMap<String, List<String>>();
 
-		for (EngagementType inEng : inEngagements) {
-			if(isPartOf(reqCareUnit, inEng.getLogicalAddress())) {
-				log.debug("Add SS: {} for PDL unit: {}", inEng.getSourceSystem(), inEng.getLogicalAddress());
-				addPdlUnitToSourceSystem(sourceSystem_pdlUnitList_map, inEng.getSourceSystem(), inEng.getLogicalAddress());
-			}
+		for (EngagementType engagement : inEngagements) {
+            // Filter
+            if (isBetween(requestFromDate, requestToDate, engagement.getMostRecentContent())) {
+    			if(isPartOf(reqCareUnit, engagement.getLogicalAddress())) {
+                    log.debug("Add source system: {} for producer: {}", engagement.getSourceSystem(), engagement.getLogicalAddress());
+    				addPdlUnitToSourceSystem(sourceSystem_pdlUnitList_map, engagement.getSourceSystem(), engagement.getLogicalAddress());
+    			}
+            }
 		}
 
 		// Prepare the result of the transformation as a list of request-payloads,
 		// one payload for each unique logical-address (e.g. source system since we are using systemaddressing),
 		// each payload built up as an object-array according to the JAX-WS signature for the method in the service interface
-		List<Object[]> reqList = new ArrayList<Object[]>();
+		List<Object[]> listOfRequests = new ArrayList<Object[]>();
 		for (Entry<String, List<String>> entry : sourceSystem_pdlUnitList_map.entrySet()) {
 			final String sourceSystem = entry.getKey();
-            final GetReferralOutcomeType request = originalRequest;
-
-            if(log.isInfoEnabled()) {
-            	log.info("Calling source system using logical address {} for subject of care {}", sourceSystem, originalRequest.getPatientId().getId());
-            }
-            
+           	log.info("Calling source system using logical address {} for subject of care {}", sourceSystem, request.getPatientId().getId());
 			Object[] reqArr = new Object[] {sourceSystem, request};
-			reqList.add(reqArr);
+			listOfRequests.add(reqArr);
 		}
 
-		log.debug("Transformed payload: {}", reqList);
-
-		return reqList;
+		log.debug("Transformed payload: {}", listOfRequests);
+		return listOfRequests;
 	}
 
-	Date parseTs(String ts) {
+	Date parseDateString(String dateString) {
 		try {
-			if (ts == null || ts.length() == 0) {
+			if (dateString == null || dateString.length() == 0) {
 				return null;
 			} else {
-				return df.parse(ts);
+				return requestDateFormat.parse(dateString);
 			}
 		} catch (ParseException e) {
 			throw new RuntimeException(e);
 		}
 	}
 
-	boolean isBetween(Date from, Date to, String tsStr) {
-		try {
-			if (log.isDebugEnabled()) {
-				log.debug("Is {} between {} and ", new Object[] {tsStr, from, to});
-			}
+    protected boolean isBetween(Date fromRequestDate, Date toRequestDate, String mostRecentContentTimestamp) {
+        if (mostRecentContentTimestamp == null) {
+            log.error("mostRecentContent - timestamp string is null");
+            return true;
+        }
+        if (StringUtils.isBlank(mostRecentContentTimestamp)) {
+            log.error("mostRecentContent - timestamp string is blank");
+            return true;
+        }
+        log.debug("Is {} between {} and ", new Object[] { mostRecentContentTimestamp, fromRequestDate, toRequestDate });
+        try {
+            Date mostRecentContent = mostRecentContentDateFormat.parse(mostRecentContentTimestamp);
+            if (fromRequestDate != null && fromRequestDate.after(mostRecentContent)) {
+                return false;
+            }
+            if (toRequestDate != null && toRequestDate.before(mostRecentContent)) {
+                return false;
+            }
+            return true;
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
-			Date ts = df.parse(tsStr);
-			if (from != null && from.after(ts)) return false;
-			if (to != null && to.before(ts)) return false;
-			return true;
-		} catch (ParseException e) {
-			throw new RuntimeException(e);
-		}
-	}
 
 	boolean isPartOf(List<String> careUnitIdList, String careUnit) {
 
