@@ -54,7 +54,7 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
               <sourceRoot>${schema.gen.src.dir}</sourceRoot>
               <wsdlOptions>
                 <wsdlOption>
-                  <wsdl>${schema.path}/TD_CLINICALPROCESS_HEALTHCOND_ACTOUTCOME_3.1/interactions/GetReferralOutcomeInteraction/GetReferralOutcomeInteraction_3.0_RIVTABP21.wsdl</wsdl>
+                  <wsdl>${schema.path}/clinicalprocess_healthcond_actoutcome/interactions/GetReferralOutcomeInteraction/GetReferralOutcomeInteraction_3.1_RIVTABP21.wsdl</wsdl>
                   <extraargs>
                     <extraarg>-validate</extraarg>
                     <extraarg>-p</extraarg>
@@ -63,6 +63,8 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
                     <extraarg>urn:riv:clinicalprocess:healthcond:actoutcome:GetReferralOutcomeResponder:3=riv.clinicalprocess.healthcond.actoutcome.getreferraloutcomeresponder.v3</extraarg>
                     <extraarg>-p</extraarg>
                     <extraarg>urn:riv:clinicalprocess:healthcond:actoutcome:3=riv.clinicalprocess.healthcond.actoutcome.v3</extraarg>
+                    <extraarg>-p</extraarg>
+                    <extraarg>urn:riv:clinicalprocess:healthcond:actoutcome:3.1=riv.clinicalprocess.healthcond.actoutcome.v3_1</extraarg>
                     <extraarg>-p</extraarg>
                     <extraarg>urn:riv:clinicalprocess:healthcond:actoutcome:enums:3=riv.clinicalprocess.healthcond.actoutcome.enums.v3</extraarg>
                     <extraarg>-p</extraarg>
