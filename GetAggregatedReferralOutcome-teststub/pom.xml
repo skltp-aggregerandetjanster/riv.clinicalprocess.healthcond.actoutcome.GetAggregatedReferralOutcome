@@ -19,6 +19,10 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
   <artifactId>GetAggregatedReferralOutcome-teststub</artifactId>
   <packaging>mule</packaging>
   <name>GetAggregatedReferralOutcome-teststub</name>
+  
+  <properties>
+    <skltp.agp.version>1.3.5</skltp.agp.version>
+  </properties>
 
   <dependencies>
     <!-- dependencies to the integration component that contains the services to stub -->
@@ -37,12 +41,12 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
     <dependency>
       <groupId>se.skltp.agp</groupId>
       <artifactId>agp-core</artifactId>
-      <version>1.3.1</version>
+      <version>${skltp.agp.version}</version>
     </dependency>
     <dependency>
       <groupId>se.skltp.agp</groupId>
       <artifactId>agp-test-common</artifactId>
-      <version>1.3.1</version>
+      <version>${skltp.agp.version}</version>
     </dependency>
   </dependencies>
 
@@ -157,7 +161,8 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
     <profile>
       <id>muleServer</id>
       <!-- Start mule server with the command
-           "mvn -PmuleServer" or "mvn -PmuleServer -Dexec.args="${artifaceId}-config.xml""
+           "mvn -PmuleServer" or 
+           "mvn -PmuleServer -Dexec.args="${artifaceId}-config.xml""
            if you want to override the default config-file -->
       <build>
         <defaultGoal>test</defaultGoal>
