@@ -24,16 +24,16 @@ public class GetAggregatedReferralOutcomeTestConsumer extends AbstractTestConsum
 		String serviceAddress = GetAggregatedReferralOutcomeMuleServer.getAddress("SERVICE_INBOUND_URL");
 		String personnummer = TEST_RR_ID_ONE_HIT;
 
-		GetAggregatedReferralOutcomeTestConsumer consumer = new GetAggregatedReferralOutcomeTestConsumer(serviceAddress, SAMPLE_SENDER_ID, SAMPLE_ORIGINAL_CONSUMER_HSAID);
+		GetAggregatedReferralOutcomeTestConsumer consumer = new GetAggregatedReferralOutcomeTestConsumer(serviceAddress, SAMPLE_SENDER_ID, SAMPLE_ORIGINAL_CONSUMER_HSAID, SAMPLE_CORRELATION_ID);
 		Holder<GetReferralOutcomeResponseType> responseHolder = new Holder<GetReferralOutcomeResponseType>();
 		Holder<ProcessingStatusType> processingStatusHolder = new Holder<ProcessingStatusType>();
 
 		consumer.callService("logical-adress", personnummer, processingStatusHolder, responseHolder);
 	}
 
-	public GetAggregatedReferralOutcomeTestConsumer(String serviceAddress, String senderId, String originalConsumerHsaId) {
+	public GetAggregatedReferralOutcomeTestConsumer(String serviceAddress, String senderId, String originalConsumerHsaId, String correlationId) {
 		// Setup a web service proxy for communication using HTTPS with Mutual Authentication
-		super(GetReferralOutcomeResponderInterface.class, serviceAddress, senderId, originalConsumerHsaId);
+		super(GetReferralOutcomeResponderInterface.class, serviceAddress, senderId, originalConsumerHsaId, correlationId);
 	}
 
 	public void callService(String logicalAddress, String registeredResidentId, Holder<ProcessingStatusType> processingStatusHolder, Holder<GetReferralOutcomeResponseType> responseHolder) {
