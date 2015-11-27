@@ -11,6 +11,9 @@
     <spring:beans>
       <!-- Load all resources needed by the core artifact -->
       <spring:import resource="classpath:aggregating-services-common.xml"/>
+
+      <!-- 3. Replacement for org.springframework.beans.factory.config.PropertyPlaceholderConfigurer
+              that supports decrypting encrypted property values -->
       <spring:bean
 			class="org.jasypt.spring.properties.EncryptablePropertyPlaceholderConfigurer"
 			id="propertyConfigurer">

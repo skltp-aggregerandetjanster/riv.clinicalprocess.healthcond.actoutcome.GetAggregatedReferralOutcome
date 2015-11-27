@@ -1,10 +1,10 @@
 package se.skltp.aggregatingservices.riv.clinicalprocess.healthcond.actoutcome.getaggregatedreferraloutcome
 
-import se.skltp.agp.testnonfunctional.TP01WarmUpAbstract
+import se.skltp.agp.testnonfunctional.TPPatientsAbstract
 
 /**
- * Simple requests to warm up service.
+ * Test VP:GetAggregatedReferralOutcome over 12 hours
  */
-class TP01WarmUp extends TP01WarmUpAbstract with CommonParameters {
+class TPPatients extends TPPatientsAbstract with CommonParameters {
   setUp(setUpAbstract(serviceName, urn, responseElement, responseItem, baseUrl))
 }
