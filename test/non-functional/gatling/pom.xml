@@ -25,7 +25,7 @@ mvn gatling:execute -PPatients -DbaseUrl=http://ine-tit-app02.sth.basefarm.net:9
 
   <groupId>se.skltp.aggregatingservices.riv.clinicalprocess.healthcond.actoutcome</groupId>
   <artifactId>GetAggregatedReferralOutcome-test-non-functional</artifactId>
-  <version>1.0.3-RC5-SNAPSHOT</version>
+  <version>1.0.4-RC1-SNAPSHOT</version>
 
   <properties>
     <gatling.version>2.1.6</gatling.version>
