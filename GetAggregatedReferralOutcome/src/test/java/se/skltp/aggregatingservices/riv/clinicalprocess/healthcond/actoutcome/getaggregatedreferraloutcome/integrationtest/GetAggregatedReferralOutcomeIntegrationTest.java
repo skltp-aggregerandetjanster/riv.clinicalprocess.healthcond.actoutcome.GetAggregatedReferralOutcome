@@ -39,7 +39,6 @@ import se.skltp.agp.test.producer.TestProducerLogger;
 
 public class GetAggregatedReferralOutcomeIntegrationTest extends AbstractAggregateIntegrationTest {
 
-	@SuppressWarnings("unused")
 	private static final Logger log = LoggerFactory.getLogger(GetAggregatedReferralOutcomeIntegrationTest.class);
 
     private static final RecursiveResourceBundle rb = new RecursiveResourceBundle("GetAggregatedReferralOutcome-config");
@@ -130,7 +129,7 @@ public class GetAggregatedReferralOutcomeIntegrationTest extends AbstractAggrega
     }
 
 	/**
-	 * Perform a test that is expected to casue the source system to fail with its processing
+	 * Perform a test that is expected to cause the source system to fail with its processing
 	 */
     @Test
 	public void test_fault_invalidInput() throws Exception {
@@ -166,7 +165,7 @@ public class GetAggregatedReferralOutcomeIntegrationTest extends AbstractAggrega
 	private List<ProcessingStatusRecordType> doTest(String registeredResidentId, String senderId, String originalConsumerHsaId, String correlationId, int expectedProcessingStatusSize, ExpectedTestData... testData) {
 
 		// Setup and perform the call to the web service
-		GetAggregatedReferralOutcomeTestConsumer consumer = new GetAggregatedReferralOutcomeTestConsumer(DEFAULT_SERVICE_ADDRESS, senderId ,originalConsumerHsaId, correlationId);
+		GetAggregatedReferralOutcomeTestConsumer consumer = new GetAggregatedReferralOutcomeTestConsumer(DEFAULT_SERVICE_ADDRESS, senderId, originalConsumerHsaId, correlationId);
 		Holder<GetReferralOutcomeResponseType> responseHolder = new Holder<GetReferralOutcomeResponseType>();
 		Holder<ProcessingStatusType> processingStatusHolder = new Holder<ProcessingStatusType>();
     	consumer.callService(LOGICAL_ADDRESS, registeredResidentId, processingStatusHolder, responseHolder);

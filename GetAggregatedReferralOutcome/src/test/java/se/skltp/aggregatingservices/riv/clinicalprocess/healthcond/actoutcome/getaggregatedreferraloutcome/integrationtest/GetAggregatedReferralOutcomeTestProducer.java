@@ -10,7 +10,10 @@ import riv.clinicalprocess.healthcond.actoutcome.getreferraloutcomeresponder.v3.
 import riv.clinicalprocess.healthcond.actoutcome.getreferraloutcomeresponder.v3.GetReferralOutcomeType;
 import se.skltp.agp.test.producer.TestProducerDb;
 
-@WebService(serviceName = "GetReferralOutcomeResponderService", portName = "GetReferralOutcomeResponderPort", targetNamespace = "urn:riv:clinicalprocess:healthcond:actoutcome:GetReferralOutcome:3:rivtabp21", name = "GetReferralOutcomeInteraction")
+@WebService(serviceName = "GetReferralOutcomeResponderService", 
+               portName = "GetReferralOutcomeResponderPort", 
+        targetNamespace = "urn:riv:clinicalprocess:healthcond:actoutcome:GetReferralOutcome:3:rivtabp21", 
+                   name = "GetReferralOutcomeInteraction")
 public class GetAggregatedReferralOutcomeTestProducer implements GetReferralOutcomeResponderInterface {
 
 	protected static final Logger log = LoggerFactory.getLogger(GetAggregatedReferralOutcomeTestProducer.class);

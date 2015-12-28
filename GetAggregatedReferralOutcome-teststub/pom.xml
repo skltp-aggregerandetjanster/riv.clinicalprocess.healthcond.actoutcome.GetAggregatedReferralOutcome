@@ -13,13 +13,13 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
   <parent>
     <groupId>se.skltp.aggregatingservices.riv.clinicalprocess.healthcond.actoutcome</groupId>
     <artifactId>GetAggregatedReferralOutcome-parent</artifactId>
-    <version>1.0.5-RC1-SNAPSHOT</version>
+    <version>1.1.0-RC1-SNAPSHOT</version>
   </parent>
 
   <artifactId>GetAggregatedReferralOutcome-teststub</artifactId>
   <packaging>mule</packaging>
   <name>GetAggregatedReferralOutcome-teststub</name>
-  
+
   <dependencies>
     <!-- dependencies to the integration component that contains the services to stub -->
     <dependency>
@@ -157,7 +157,7 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
     <profile>
       <id>muleServer</id>
       <!-- Start mule server with the command
-           "mvn -PmuleServer" or 
+           "mvn -PmuleServer" or
            "mvn -PmuleServer -Dexec.args="${artifaceId}-config.xml""
            if you want to override the default config-file -->
       <build>
