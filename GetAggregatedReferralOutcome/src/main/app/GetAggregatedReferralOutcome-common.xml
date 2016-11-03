@@ -37,6 +37,7 @@
 	    <spring:property name="locations">
 	      <spring:list>
 	        <spring:value>classpath:GetAggregatedReferralOutcome-config.properties</spring:value>
+	        <spring:value>classpath:agp-config-override.properties</spring:value>
 	        <spring:value>classpath:GetAggregatedReferralOutcome-config-override.properties</spring:value>
 	      </spring:list>
 	    </spring:property>
