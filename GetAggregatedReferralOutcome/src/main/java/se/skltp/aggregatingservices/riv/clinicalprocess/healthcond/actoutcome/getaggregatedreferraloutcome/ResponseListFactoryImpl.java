@@ -53,7 +53,7 @@ public class ResponseListFactoryImpl implements ResponseListFactory {
         aggregatedResponse.getResult().setResultCode(ResultCodeEnum.INFO);
 
         String subjectOfCareId = queryObject.getFindContent().getRegisteredResidentIdentification();
-        log.info("Returning {} aggregated alert informations for subject of care id {}", aggregatedResponse.getReferralOutcome().size(),
+        log.info("Returning {} aggregated referral outcomes for subject of care id {}", aggregatedResponse.getReferralOutcome().size(),
                 subjectOfCareId);
 
         return jaxbUtil.marshal(OF.createGetReferralOutcomeResponse(aggregatedResponse));
