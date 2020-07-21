@@ -17,11 +17,11 @@ public class ServiceConfiguration extends TestProducerConfiguration {
   public ServiceConfiguration() {
     setProducerAddress("http://localhost:8083/vp");
     setServiceClass(GetReferralOutcomeResponderInterface.class.getName());
-    setServiceNamespace("urn:riv:CHANGE_IT");
+    setServiceNamespace("urn:riv:clinicalprocess:healthcond:actoutcome:GetReferralOutcomeResponder:3");
     setPortName(GetReferralOutcomeResponderService.GetReferralOutcomeResponderPort.toString());
     setWsdlPath(SCHEMA_PATH);
     setTestDataGeneratorClass(ServiceTestDataGenerator.class.getName());
-	setServiceTimeout(27000);
+   	setServiceTimeout(27000);
   }
 
 }
